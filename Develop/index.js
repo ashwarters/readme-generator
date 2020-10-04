@@ -1,5 +1,7 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
+const axios = require('axios').default;
+
 
 // array of questions for user
 const questions = [
@@ -10,12 +12,12 @@ const questions = [
     },
     {
         type:'input',
-        name:'badge-link',
+        name:'badgeLink',
         message:'List desired badge links:'
     },
     {
         type:'input',
-        name:'project-description',
+        name:'projectDescription',
         message: 'Describe your project:'
     },
     {
@@ -57,8 +59,26 @@ const questions = [
 ];
 
 // function to write README file
-function writeToFile(fileName, data) {
-}
+inquirer
+    .prompt(questions)
+    .then(function(data){
+        const answersURL = `https://api.github.com/users/${data.userInfo}`;
+
+        axios.get(answersURL).then(function(res){
+            const githubData ={
+                githubAvatar:res.data.avatar_url,
+                githubEmail: res.data.email,
+                githubProfile: res.data.html_url,
+                githubName: res.data.name
+            };
+        fs.writeFile('README.md', generate(data.githubData), function(err){
+            if (err){
+                throw err;
+            };
+            console.log('README.md successfully created!');
+        });
+        });
+});
 
 // function to initialize program
 function init() {
