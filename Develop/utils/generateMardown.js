@@ -9,17 +9,6 @@ ${data.badgeLink}
 
 ${data.projectDescription}
 
-##Table of Contents
-
--[Project Description]
--[Install]
--[Usage]
--[Licensing]
--[Contributors]
--[Test]
--[Repo Link]
--[GitHub Information]
-
 ##Installation
 
 ${data.install}

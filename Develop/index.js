@@ -1,6 +1,6 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
-const axios = require('axios').default;
+const axios = require('axios');
 const generate = require('./utils/generateMardown')
 
 
@@ -14,7 +14,7 @@ const questions = [
     {
         type:'input',
         name:'badgeLink',
-        message:'List desired badge links:'
+        message:'List badge links:'
     },
     {
         type:'input',
@@ -63,16 +63,15 @@ const questions = [
 inquirer
     .prompt(questions)
     .then(function(data){
-        const answersURL = `https://api.github.com/users/${data.userInfo}`;
+        const queryURL = `https://api.github.com/users/${data.userInfo}`;
 
-        axios.get(answersURL).then(function(res){
+        axios.get(queryURL).then(function(res){
             const githubData ={
-                githubAvatar:res.data.avatar_url,
                 githubEmail: res.data.email,
                 githubProfile: res.data.html_url,
                 githubName: res.data.name
             };
-        fs.writeFile('README.md', generate(data.githubData), function(err){
+        fs.writeFile('README.md', JSON.stringify(data.githubData), function(err){
             if (err){
                 throw err;
             };
@@ -84,7 +83,7 @@ inquirer
 // function to initialize program
 function init() {
 
-}
+};
 
 // function call to initialize program
 init();
