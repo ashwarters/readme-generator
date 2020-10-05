@@ -5,7 +5,6 @@ This app allows a user to generate a detailed README.md file by being prompted f
 
 https://drive.google.com/file/d/1HrXr1Eeew-RBybp0DXAK4SW0aJNxZtHY/view
 
-<iframe src="https://drive.google.com/file/d/1HrXr1Eeew-RBybp0DXAK4SW0aJNxZtHY/preview" width="640" height="480"></iframe>
 
 # Installation
 - https://www.npmjs.com/package/inquirer#installation
